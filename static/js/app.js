@@ -67,31 +67,30 @@ function plotCharts(id) {
     });
 };
 
-// Update plots when a new sample is selected
-
+// Plot demographic data based on the selected id
 function plotDemographicData(id) {
-d3.json("static/js/samples.json").then((importedData) => {
-    let metadata = importedData.metadata;
-    console.log(`Metadata ${metadata}`)
+    d3.json("static/js/samples.json").then((importedData) => {
+        let metadata = importedData.metadata;
 
-    // Select metadata based on the id
-    let metadata_values = metadata.filter(mdata => mdata.id.toString() === id)[0];
-    let dInfo = d3.select("#sample-metadata");
+        // Select metadata based on the id
+        let metadata_values = metadata.filter(mdata => mdata.id.toString() === id)[0];
+        let dInfo = d3.select("#sample-metadata");
 
-    // Clear the metadata information
-    dInfo.html("");
+        // Clear the metadata information
+        dInfo.html("");
 
-    Object.entries(metadata_values).forEach((key) => {
-        dInfo.append("h5").text(key[0] + ": " + key[1] + "\n");
+        Object.entries(metadata_values).forEach((key) => {
+            dInfo.append("h5").text(key[0] + ": " + key[1] + "\n");
+        });
     });
-});
 
 }
 
+// Call optionChanged function to change demographic data based on ID
+function optionChanged(newID) {
 
-function optionChanged(id) {
-    plotCharts(id);
-    plotDemographicData(id);
+    plotCharts(newID);
+    plotDemographicData(newID);
 }
 
 
