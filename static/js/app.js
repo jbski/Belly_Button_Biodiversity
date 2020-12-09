@@ -117,8 +117,4 @@ function init() {
 
 
 
-
-
 init();
-
-// plotCharts()
